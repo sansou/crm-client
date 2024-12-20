@@ -3,12 +3,7 @@ import { Lead } from '@/app/interfaces/interfaces';
 import { ViewLeads } from '../buttons';
 
 export default async function LeadTable(props: { projectId: string }) {
-  console.log(props.projectId);
-
   const leads: Lead[] = await getLeads(props.projectId);
-  console.log(leads);
-  
-
   return (
     <div className="mt-6 flow-root">
       <div className="inline-block min-w-full align-middle">
@@ -16,13 +11,10 @@ export default async function LeadTable(props: { projectId: string }) {
           <div className="md:hidden">
             {leads?.map((lead: Lead) => (
               <div
-                key={lead.pk}
+                key={lead.sk}
                 className="mb-2 w-full rounded-md bg-white p-4"
               >
                 <div className="flex items-center justify-between border-b pb-4">
-                  <div>
-                    <p className="text-sm text-gray-500">{lead.pk}</p>
-                  </div>
                   <div>
                     <p className="text-sm text-gray-500">{lead.sk}</p>
                   </div>
@@ -38,7 +30,7 @@ export default async function LeadTable(props: { projectId: string }) {
                     <p>{lead.createdAt.toLocaleString()}</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <ViewLeads id={lead.pk} />
+                    <ViewLeads id={lead.sk} />
                   </div>
                 </div>
               </div>
@@ -48,14 +40,12 @@ export default async function LeadTable(props: { projectId: string }) {
             <thead className="rounded-lg text-left text-sm font-normal">
               <tr>
                 <th scope="col" className="px-4 py-5 font-medium sm:pl-6">
-                  Id
-                </th>
-                <th scope="col" className="px-3 py-5 font-medium">
                   email
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Nome
+                  nome
                 </th>
+
                 <th scope="col" className="px-3 py-5 font-medium">
                   Status
                 </th>
@@ -70,13 +60,13 @@ export default async function LeadTable(props: { projectId: string }) {
             <tbody className="bg-white">
               {leads?.map((lead) => (
                 <tr
-                  key={lead.pk}
+                  key={lead.sk}
                   className="w-full border-b py-3 text-sm last-of-type:border-none [&:first-child>td:first-child]:rounded-tl-lg [&:first-child>td:last-child]:rounded-tr-lg [&:last-child>td:first-child]:rounded-bl-lg [&:last-child>td:last-child]:rounded-br-lg"
                 >
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex items-center gap-3">
 
-                      <p>{lead.pk}</p>
+                      <p>{lead.sk}</p>
                     </div>
                   </td>
                   <td className="whitespace-nowrap px-3 py-3">
@@ -91,7 +81,7 @@ export default async function LeadTable(props: { projectId: string }) {
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <ViewLeads id={lead.pk} />
+                      <ViewLeads id={lead.sk} />
                     </div>
                   </td>
                 </tr>

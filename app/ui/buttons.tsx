@@ -1,4 +1,4 @@
-import { EyeIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { EyeIcon, PencilIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Link from "next/link";
@@ -33,13 +33,13 @@ export function Button({ children, className, ...rest }: ButtonProps) {
   );
 }
 
-export function ViewLeads({ id }: { id: string }) {
+export function ViewLeads({ projectId , id }: {projectId:string,  id: string }) {
   return (
     <Link
       href={`/projects/${id}/leads`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
-      <EyeIcon className="w-5" />
+      <PencilIcon className="w-5" />
     </Link>
   );
 }
