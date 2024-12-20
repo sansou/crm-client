@@ -11,3 +11,11 @@ export interface Project {
   createdAt?: Date,
   updatadAt?: Date,
 }
+
+export type ProjectCreate  = {
+  name: string,
+  status?: StatusProject,
+  domains: string[],
+  accounts: string[], //não esquecer de zerar na hora de normalizar
+  description?: string,
+}
