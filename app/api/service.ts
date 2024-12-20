@@ -41,3 +41,15 @@ export async function createProject(createProjectDTO: ProjectCreate) {
     console.log(error);
   }
 }
+
+export async function getLeads(projecId: string) {
+  try {
+    const res = await fetch(API_URL + 'leads/project/' + projecId);
+    if (!res.ok) {
+      throw new Error(res.status);
+    }
+    return await res.json();
+  } catch (error) {
+    console.log(error);
+  }
+}
