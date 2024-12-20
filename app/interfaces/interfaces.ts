@@ -8,7 +8,7 @@ export interface Project {
   domains: string[],
   accounts?: string[], //não esquecer de zerar na hora de normalizar
   description?: string,
-  createdAt?: Date,
+  createdAt: Date,
   updatadAt?: Date,
 }
 

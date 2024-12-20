@@ -1,4 +1,4 @@
-'use server'
+
 
 import { ProjectCreate } from "../interfaces/interfaces";
 
@@ -24,8 +24,6 @@ export async function getProjects() {
 }
 
 export async function createProject(createProjectDTO: ProjectCreate) {
-  const datajson = JSON.stringify({createProjectDTO});
-  console.log(datajson);
   
   try {
     const res = await fetch(API_URL + 'projects', {
