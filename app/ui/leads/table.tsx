@@ -1,6 +1,6 @@
 import { getLeads } from '@/app/api/service';
 import { Lead } from '@/app/interfaces/interfaces';
-import { ViewLeads } from '../buttons';
+import { EditLead,  } from '../buttons';
 
 export default async function LeadTable(props: { projectId: string }) {
   const leads: Lead[] = await getLeads(props.projectId);
@@ -30,7 +30,7 @@ export default async function LeadTable(props: { projectId: string }) {
                     <p>{lead.createdAt.toLocaleString()}</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <ViewLeads id={lead.sk} />
+                    <EditLead projectId={props.projectId} id={lead.sk} />
                   </div>
                 </div>
               </div>
@@ -45,9 +45,8 @@ export default async function LeadTable(props: { projectId: string }) {
                 <th scope="col" className="px-3 py-5 font-medium">
                   nome
                 </th>
-
                 <th scope="col" className="px-3 py-5 font-medium">
-                  Status
+                  status
                 </th>
                 <th scope="col" className="px-3 py-5 font-medium">
                   Criado em
@@ -81,7 +80,7 @@ export default async function LeadTable(props: { projectId: string }) {
                   </td>
                   <td className="whitespace-nowrap py-3 pl-6 pr-3">
                     <div className="flex justify-end gap-3">
-                      <ViewLeads id={lead.sk} />
+                      <EditLead projectId={props.projectId} id={lead.sk} />
                     </div>
                   </td>
                 </tr>

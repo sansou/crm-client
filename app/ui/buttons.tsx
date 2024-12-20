@@ -1,4 +1,5 @@
-import { EyeIcon, PencilIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { EyeDropperIcon, EyeIcon, PencilIcon, ViewColumnsIcon } from "@heroicons/react/24/outline";
+import { EyeSlashIcon } from "@heroicons/react/24/outline";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import clsx from "clsx";
 import Link from "next/link";
@@ -33,13 +34,13 @@ export function Button({ children, className, ...rest }: ButtonProps) {
   );
 }
 
-export function ViewLeads({ projectId , id }: {projectId:string,  id: string }) {
+export function ViewLeads({  id }: { id: string }) {
   return (
     <Link
       href={`/projects/${id}/leads`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
-      <PencilIcon className="w-5" />
+      <EyeIcon className="w-5" />
     </Link>
   );
 }
@@ -52,6 +53,17 @@ export function CreateLead() {
     >
       <span className="hidden md:block">Create Lead</span>{' '}
       <PlusIcon className="h-5 md:ml-4" />
+    </Link>
+  );
+}
+
+export function EditLead({ projectId,  id }: { projectId: string, id: string }) {
+  return (
+    <Link
+      href={`/projects/${projectId}/leads/${id}`}
+      className="rounded-md border p-2 hover:bg-gray-100"
+    >
+      <PencilIcon className="w-5" />
     </Link>
   );
 }

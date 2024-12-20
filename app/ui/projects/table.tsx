@@ -32,7 +32,7 @@ export default async function ProjectTable() {
                     <p>{project.createdAt.toLocaleString()}</p>
                   </div>
                   <div className="flex justify-end gap-2">
-                    <ViewLeads id={project.pk} />
+                    <ViewLeads id={project.sk} />
                   </div>
                 </div>
               </div>
