@@ -1,22 +1,20 @@
-import { ArrowPathIcon } from "@heroicons/react/24/outline";
 import { lusitana } from "../fonts";
 import clsx from "clsx";
+import { getProjects } from "@/app/api/service";
+import { Project } from "@/app/interfaces/interfaces";
 
 export default async function ProjectsList() {
-  
-  const projects = await fetchLatestInvoices();
+
+  const projects:Project[]  = await getProjects();
 
   return (
     <div className="flex w-full flex-col md:col-span-4">
-      <h2 className={`${lusitana.className} mb-4 text-xl md:text-2xl`}>
-        Latest Invoices
-      </h2>
       <div className="flex grow flex-col justify-between rounded-xl bg-gray-50 p-4">
         <div className="bg-white px-6">
-          {projects.map((proj, i) => {
+          {projects.map((proj: Project, i) => {
             return (
               <div
-                key={proj.id}
+                key={proj.pk}
                 className={clsx(
                   'flex flex-row items-center justify-between py-4',
                   {
@@ -30,23 +28,20 @@ export default async function ProjectsList() {
                       {proj.name}
                     </p>
                     <p className="hidden text-sm text-gray-500 sm:block">
-                      {proj.email}
+                      {proj.status}
                     </p>
                   </div>
                 </div>
                 <p
                   className={`${lusitana.className} truncate text-sm font-medium md:text-base`}
                 >
-                  {proj.amount}
+                  {proj.domains}
                 </p>
               </div>
             );
           })}
         </div>
-        <div className="flex items-center pb-2 pt-6">
-          <ArrowPathIcon className="h-5 w-5 text-gray-500" />
-          <h3 className="ml-2 text-sm text-gray-500 ">Updated just now</h3>
-        </div>
+        
       </div>
     </div>
   );

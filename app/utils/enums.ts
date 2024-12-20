@@ -1,0 +1,13 @@
+export enum StatusProject {
+  ATIVO = "ATIVO",
+  DESATIVADO = "DESATIVADO",
+}
+
+export enum StatusLead {
+  PROSPECT = 'PROSPECT',
+  OPEN = 'OPEN',
+  WORKING = 'WORKING',
+  DISQUALIFIED = 'DISQUALIFIED',
+  NOT_A_TARGER = 'NOT A TARGET',
+  QUALIFIED = 'QUALIFIED'
+}
