@@ -60,7 +60,7 @@ export function CreateLead() {
 export function EditLead({ projectId,  id }: { projectId: string, id: string }) {
   return (
     <Link
-      href={`/projects/${projectId}/leads/${id}`}
+      href={`/projects/${projectId}/leads/${id}/edit`}
       className="rounded-md border p-2 hover:bg-gray-100"
     >
       <PencilIcon className="w-5" />

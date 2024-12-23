@@ -35,3 +35,9 @@ export interface Lead {
   createdAt: Date,
   updatedAt: Date
 }
+export type updateLeadForm = {
+  pk: string;
+  sk: string;
+  status: StatusLead;
+  observation: string;
+};
