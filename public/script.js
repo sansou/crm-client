@@ -2,11 +2,15 @@ const project = {
   id: '',
 };
 
+const URL_PRODUCTION = 'https://crm-production-e403.up.railway.app/';
+
 // Função para enviar os dados capturados para a API
-function sendDataToAPI(data) {
+async function  sendDataToAPI(data) {
   const body = JSON.stringify({...data, projectId: project.id})
    
-  fetch('http://localhost:4000/leads', {
+  console.log(body);
+  
+  fetch( URL_PRODUCTION +'leads', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -24,13 +28,13 @@ function sendDataToAPI(data) {
 
 // Adicionar um listener de evento para capturar o lead quando o formulário for enviado
 function captureLead() {
-  const script = document.currentScript;
-  const form = script.closest('form'); // Pega a tag form que seja pai do script
+  const form = document.querySelector("form[data-crm-id='xyz']");    
   if (form) {
     //pegar a ação
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const formData = new FormData(form);
+      console.log('data:',formData);
       const data = Object.fromEntries(formData.entries());
       sendDataToAPI(data);
       form.submit();
