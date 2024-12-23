@@ -2,14 +2,18 @@ const project = {
   id: '',
 };
 
-const URL_PRODUCTION = 'https://crm-production-e403.up.railway.app/';
-// const URL_LOCAL = 'http://127.0.0.1:4000/';
+// const URL_PRODUCTION = 'https://crm-production-e403.up.railway.app/';
+const URL_LOCAL = 'http://127.0.0.1:4000/';
 
 // Função para enviar os dados capturados para a API
 async function sendDataToAPI(data) {
+  const host = window.location.host;
+  data.host = host;
+  console.log('host:', host);
+  
   const body = JSON.stringify({ ...data, projectId: project.id })
   try {
-    const response = await fetch(URL_PRODUCTION + 'leads', {
+    const response = await fetch(URL_LOCAL + 'leads', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

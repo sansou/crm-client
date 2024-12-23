@@ -39,5 +39,5 @@ export type updateLeadForm = {
   pk: string;
   sk: string;
   status: StatusLead;
-  observation: string;
+  observation?: string[];
 };

@@ -8,17 +8,12 @@ import React, { useState } from 'react';
 export default function EditLeadForm({ lead }: { lead: Lead }) {
   const [status, setStatus] = useState<StatusLead>(lead.status);
   const [comment, setComment] = useState<string>('');
-  const [comments, setComments] = useState(lead.observation);
+  const [comments, setComments] = useState<string[] >(lead.observation);
 
 
   const handleSubmit = (e: React.FormEvent) => {
-    if (comment.trim() !== '') {
-      lead.observation?.push(comment);
-    }
-    setComment
-    const updatedLeadDto: updateLeadForm = { pk: lead.pk, sk: lead.sk, status, observation: comment };
-    console.log("update:", updatedLeadDto);
-    
+
+    const updatedLeadDto: updateLeadForm = { pk: lead.pk, sk: lead.sk, status, observation: comments };
     updateLead(updatedLeadDto);
     redirect(`http://127.0.0.1:3000/projects/${lead.pk}/leads`)
   };
@@ -53,7 +48,7 @@ export default function EditLeadForm({ lead }: { lead: Lead }) {
         <textarea
           id="comments"
           value={comments}
-          onChange={(e) => setComments(e.target.value)}
+          onChange={(e) => setComment(e.target.value)}
           rows={4}
           className="w-full p-2 border rounded"
           placeholder="Comentário sobre este lead..."
