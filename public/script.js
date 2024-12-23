@@ -3,47 +3,46 @@ const project = {
 };
 
 const URL_PRODUCTION = 'https://crm-production-e403.up.railway.app/';
+// const URL_LOCAL = 'http://127.0.0.1:4000/';
 
 // Função para enviar os dados capturados para a API
-async function  sendDataToAPI(data) {
-  const body = JSON.stringify({...data, projectId: project.id})
-   
-  console.log(body);
-  
-  fetch( URL_PRODUCTION +'leads', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: body,
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Dados enviados com sucesso:', data);
+async function sendDataToAPI(data) {
+  const body = JSON.stringify({ ...data, projectId: project.id })
+  try {
+    const response = await fetch(URL_PRODUCTION + 'leads', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: body,
     })
-    .catch(error => {
-      console.error('Erro ao enviar o lead:', error);
-    });
+    if (!response.ok) {
+      console.log('Erro na requisição');
+    }
+    const data = await response.json();
+    console.log("lead enviado com sucesso");
+  } catch (error) {
+    console.log("Erro ao enviar lead", error);
+  }
 }
 
 // Adicionar um listener de evento para capturar o lead quando o formulário for enviado
-function captureLead() {
-  const form = document.querySelector("form[data-crm-id='xyz']");    
+async function captureLead() {
+  const form = document.querySelector("form[data-crm-id='xyz']");
   if (form) {
     //pegar a ação
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', async (event) => {
       event.preventDefault();
       const formData = new FormData(form);
-      console.log('data:',formData);
       const data = Object.fromEntries(formData.entries());
-      sendDataToAPI(data);
+      await sendDataToAPI(data);
       form.submit();
     });
   }
 }
 
 function getProjectId() {
-  const id = document.currentScript?.getAttribute("data-project-id");    
+  const id = document.currentScript?.getAttribute("data-project-id");
   if (id) project.id = id
   if (!project.id) throw new Error('Script missing ID parameter.')
   // if (!project.id.match(/[0-9a-f]{24}/g)) throw new Error('Script with abnormal ID parameter.')
